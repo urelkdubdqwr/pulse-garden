@@ -1,0 +1,58 @@
+{
+  "name": "pulse-garden",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pulse Garden — a calm-breathing desktop companion that blooms in response to live pulse, breathing and facial-expression signals (Presage SmartSpectra SDK). Challenge entry: #presagechallenge",
+  "main": "main.js",
+  "scripts": {
+    "build": "esbuild renderer.js --bundle --outfile=dist/renderer.bundle.js --platform=browser --format=iife --log-level=warning",
+    "start": "npm run build && electron .",
+    "dist:linux": "npm run build && electron-builder --linux --x64",
+    "dist:win": "npm run build && electron-builder --win --x64",
+    "dist:mac": "npm run build && electron-builder --mac --arm64"
+  },
+  "dependencies": {
+    "@smartspectra/node-sdk": "latest"
+  },
+  "devDependencies": {
+    "electron": "43.8.1",
+    "electron-builder": "^26.6.0",
+    "esbuild": "^0.25.0"
+  },
+  "build": {
+    "appId": "com.onar.pulsegarden",
+    "productName": "Pulse Garden",
+    "files": [
+      "main.js",
+      "index.html",
+      "styles.css",
+      "dist/**",
+      "node_modules/**",
+      "!node_modules/@smartspectra/node-sdk-*/**"
+    ],
+    "mac": {
+      "category": "public.app-category.healthcare-fitness",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "NSCameraUsageDescription": "Pulse Garden uses your camera to measure pulse, breathing and expression so the garden can respond to you in real time. Processing happens on-device."
+      },
+      "extraResources": [
+        { "from": "node_modules/@smartspectra/node-sdk-darwin-${arch}/", "to": "smartspectra" }
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "extraResources": [
+        { "from": "node_modules/@smartspectra/node-sdk-win32-${arch}/", "to": "smartspectra" }
+      ]
+    },
+    "linux": {
+      "target": "AppImage",
+      "extraResources": [
+        { "from": "node_modules/@smartspectra/node-sdk-linux-${arch}/", "to": "smartspectra" }
+      ]
+    },
+    "asar": true
+  }
+}

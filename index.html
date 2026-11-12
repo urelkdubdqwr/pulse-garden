@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; media-src blob:;">
+    <title>Pulse Garden</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- Consent gate — required before any camera access. -->
+    <div id="consent" class="overlay">
+        <div class="card">
+            <h1>Pulse&nbsp;Garden 🌱</h1>
+            <p class="lede">A calm-breathing companion. A garden that responds to <b>your</b> pulse, breath and expression in real time.</p>
+            <div class="consent-body">
+                <h2>Before we start — camera consent</h2>
+                <ul>
+                    <li><b>What it uses:</b> your camera, only while a session is running.</li>
+                    <li><b>What happens on-device:</b> the SmartSpectra SDK computes pulse, breathing rate and facial expression <b>locally</b>. Raw video never leaves your machine. Pulse/breathing/expression <b>values are never uploaded</b>.</li>
+                    <li><b>Telemetry:</b> the SDK sends an <b>aggregate, anonymous</b> session summary (build, platform, counts) by default — no video, no metric values, no identifiers. Disable it below if you prefer.</li>
+                    <li><b>Storage:</b> Pulse Garden stores nothing. Close the app and the session is gone. No account, no cloud.</li>
+                    <li><b>Not medical:</b> this is a general-wellness relaxation toy. It is not a medical device and makes no diagnosis or treatment claims.</li>
+                </ul>
+                <label class="toggle">
+                    <input type="checkbox" id="consent-telemetry" checked>
+                    <span>Allow the SDK's anonymous session diagnostic (optional)</span>
+                </label>
+            </div>
+            <button id="btn-consent" type="button">I consent — start the garden</button>
+            <p class="fineprint">Press Start afterwards. Your camera LED will light up; the stream stays on this device.</p>
+        </div>
+    </div>
+
+    <header id="topbar">
+        <div class="brand">Pulse&nbsp;Garden</div>
+        <div class="hud">
+            <div class="stat"><span class="label">Pulse</span><span class="val" id="hud-pulse">—</span><span class="unit">BPM</span></div>
+            <div class="stat"><span class="label">Breath</span><span class="val" id="hud-breath">—</span><span class="unit">BR/min</span></div>
+            <div class="stat"><span class="label">Mood</span><span class="val" id="hud-mood">—</span></div>
+            <div class="stat"><span class="label">Calm</span><span class="val" id="hud-calm">0</span><span class="unit">%</span></div>
+        </div>
+        <span id="status-badge" class="status">idle</span>
+    </header>
+
+    <main>
+        <canvas id="garden"></canvas>
+        <video id="preview" autoplay playsinline muted></video>
+        <div id="validation" class="hint">Press <b>Start</b> and settle into frame.</div>
+        <div id="error-banner" class="error" hidden><code id="error-code"></code> <span id="error-message"></span></div>
+    </main>
+
+    <footer id="controls">
+        <button id="btn-start" type="button">Start</button>
+        <button id="btn-stop" type="button" disabled>Stop</button>
+        <button id="btn-reset" type="button" disabled>Reset</button>
+        <span class="footnote">Signals stay on-device · not a medical device</span>
+    </footer>
+
+    <script src="./config.js"></script>
+    <script src="./dist/renderer.bundle.js"></script>
+</body>
+</html>
