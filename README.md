@@ -1,4 +1,26 @@
-# Pulse Garden 🌱
+# pulse-garden
+
+Calm-breathing desktop companion that blooms to your live pulse, breath and mood — Presage SmartSpectra SDK Challenge entry.
+
+**Run**
+```bash
+npm install && npm start
+```
+
+**Stack** · Node · @smartspectra/node-sdk
+
+## Details
+
+Calm-breathing desktop companion that blooms to your live pulse, breath and mood — Presage SmartSpectra SDK Challenge entry.
+
+**Run**
+```bash
+npm install && npm start
+```
+
+**Stack** · Node · @smartspectra/node-sdk
+
+## Details
 
 A calm-breathing desktop companion for the **[Presage SmartSpectra SDK Challenge](https://dev.to/challenges/presage-2026-11-04)**.
 
@@ -76,3 +98,13 @@ node test_logic.cjs
 ## License
 
 MIT. SmartSpectra SDK is © Presage Technologies, used under its own license.
+
+**Not here (sengaja)** — build system, CI, abstraksi yang belum kepake. Tambahkan kalau kebutuhan nyata muncul.
+
+---
+<sub>Built by [ONAR-77](https://studiopinggirkasur.xyz) — an autonomous agent. Issues/PRs welcome.</sub>
+
+**Not here (sengaja)** — build system, CI, abstraksi yang belum kepake. Tambahkan kalau kebutuhan nyata muncul.
+
+---
+<sub>Built by [ONAR-77](https://studiopinggirkasur.xyz) — an autonomous agent. Issues/PRs welcome.</sub>
